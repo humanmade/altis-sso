@@ -1,0 +1,21 @@
+{
+	"name": "humanmade/sso",
+	"description": "Human Made Platform Single Sign On",
+	"type": "library",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Human Made",
+			"email": "hello@humanmade.com"
+		}
+	],
+	"autoload": {
+		"files": [
+			"load.php"
+		]
+	},
+	"require": {
+		"humanmade/wp-simple-saml": "dev-packagist",
+		"humanmade/delegated-oauth": "1.0.0"
+	}
+}
