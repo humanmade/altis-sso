@@ -33,7 +33,7 @@ Contents of `config/sso/saml-idp-metadata.xml`:
     <md:KeyDescriptor use="encryption">
       <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
         <ds:X509Data>
-          <ds:X509Certificate>//redactoed</ds:X509Certificate>
+          <ds:X509Certificate>//redacted</ds:X509Certificate>
         </ds:X509Data>
       </ds:KeyInfo>
     </md:KeyDescriptor>
