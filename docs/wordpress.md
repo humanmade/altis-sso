@@ -10,7 +10,7 @@ Provide the REST BASE of your WordPress site (usually `https://examples.com/wp-j
 "sso": {
 	"wordpress": {
 		"server-rest-base": "https://examples.com/wp-json/",
-		"oauth2-client-id: "XXXXXXXXXXX"
+		"oauth2-client-id": "XXXXXXXXXXX"
 	}
 }
 ```
