@@ -8,7 +8,7 @@ To enabled SAML 2.0 support, define the following options in the configuration f
 ```json
 "sso": {
 	"saml": {
-		required: true | false
+		"required": true | false
 	}
 }
 ```
