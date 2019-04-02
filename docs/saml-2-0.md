@@ -2,7 +2,7 @@
 
 The SSO module includes support for SAML 2.0 as a Service Provider. To enable SAML 2.0, you must define the `saml` setting in the Platform configuration. You'll need a copy of your SAML IdP Metadata XML too.
 
-To enabled SAML 2.0 support, define the following options in the configuration file, and provider the SAML IdP Metadata in a file:
+To enabled SAML 2.0 support, define the following options in the configuration file, and provide the SAML IdP Metadata in a file:
 
 
 ```json
