@@ -44,4 +44,4 @@ Contents of `config/sso/saml-idp-metadata.xml`:
 </md:EntityDescriptor>
 ```
 
-For further details on SAML 2.0, see the [wp-simple-sample](https://github.com/humanmade/wp-simple-saml) plugin details.
+For further details on SAML 2.0, see the [wp-simple-saml](https://github.com/humanmade/wp-simple-saml) plugin details.
