@@ -1,6 +1,6 @@
 {
 	"name": "humanmade/sso",
-	"description": "Human Made Platform Single Sign On",
+	"description": "Single Sign-On module for Altis",
 	"type": "library",
 	"license": "GPL-2.0-or-later",
 	"authors": [
