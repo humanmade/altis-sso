@@ -1,5 +1,5 @@
 {
-	"name": "humanmade/sso",
+	"name": "altis/sso",
 	"description": "Single Sign-On module for Altis",
 	"type": "library",
 	"license": "GPL-2.0-or-later",
