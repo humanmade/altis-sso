@@ -2,7 +2,7 @@
 
 <p align="center">Single Sign On module for <strong><a href="https://altis-dxp.com/">Altis</a></strong>.</p>
 
-<p align="center"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/altis/sso.svg"></p>
+<p align="center"><a href="https://packagist.org/packages/altis/sso"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/altis/sso.svg"></a></p>
 
 ## SSO
 
