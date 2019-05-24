@@ -1,6 +1,6 @@
 <?php
 
-namespace Altis\SSO;
+namespace Altis\SSO; // @codingStandardsIgnoreLine
 
 use function Altis\get_config;
 use function Altis\register_module;
