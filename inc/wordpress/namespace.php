@@ -2,8 +2,8 @@
 
 namespace Altis\SSO\WordPress;
 
-use function Altis\get_config;
 use const Altis\ROOT_DIR;
+use function Altis\get_config;
 
 function bootstrap() {
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\load_plugin' );
