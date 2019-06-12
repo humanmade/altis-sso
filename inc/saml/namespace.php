@@ -17,7 +17,19 @@ function bootstrap() {
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\remove_plugin_admin_ui' );
 }
 
+/**
+ * Get metadata file path.
+ *
+ * Uses configuration option if available, otherwise falls back to a default.
+ *
+ * @return string Full path to the metadata file.
+ */
 function get_idp_metadata_file_path() : string {
+	$config = get_config()['modules']['sso']['saml'];
+	if ( isset( $config['metadata_file'] ) ) {
+		return ROOT_DIR . DIRECTORY_SEPARATOR . $config['metadata_file'];
+	}
+
 	return ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
 }
 
