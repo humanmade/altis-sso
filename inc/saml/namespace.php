@@ -17,8 +17,28 @@ function bootstrap() {
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\remove_plugin_admin_ui' );
 }
 
+/**
+ * Get metadata file path.
+ *
+ * Uses configuration option if available, otherwise falls back to a default.
+ *
+ * @return string Full path to the metadata file.
+ */
 function get_idp_metadata_file_path() : string {
-	return ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
+	$config = get_config()['modules']['sso']['saml'];
+	if ( isset( $config['metadata_file'] ) ) {
+		return ROOT_DIR . DIRECTORY_SEPARATOR . $config['metadata_file'];
+	}
+
+	// If the legacy-style file exists, load it, but warn.
+	$legacy_file = ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
+	if ( file_exists( $legacy_file ) ) {
+		trigger_error( 'The default "config/sso/saml-idp-metadata.xml" path is deprecated as of Altis 2.0. Specify the metadata_file setting manually, or use the default ".config/sso/saml-idp-metadata.xml".', E_USER_DEPRECATED );
+		return $legacy_file;
+	}
+
+	// Otherwise, use the default.
+	return ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
 }
 
 function get_sp_client_id() : string {

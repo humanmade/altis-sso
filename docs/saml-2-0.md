@@ -8,16 +8,17 @@ To enabled SAML 2.0 support, define the following options in the configuration f
 ```json
 "sso": {
 	"saml": {
-		"required": true | false
+		"required": true | false,
+		"metadata_file": ".config/sso/saml-idp-metadata.xml"
 	}
 }
 ```
 
 The `required` setting defines whether authentication via the SAML 2.0 IdP for all users, or if it should be optional. When set to `true`, all users attempting to login to the site will be redirected to the SAML IdP for authorization. When setting this to `false`, an "SSO Login" link will be added to the login page, where users can optionally authorize with the SAML IdP.
 
-To provide the SAML IdP Metadata file, paste your SAML IpP's metadata into a new file at the path `config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace. For example:
+Your SAML IdP Metadata file is specified by the `metadata_file` setting, which is a path relative to your project root. By default, this is set to `.config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace.
 
-Contents of `config/sso/saml-idp-metadata.xml`:
+For example:
 
 ```xml
 <?xml version="1.0"?>
