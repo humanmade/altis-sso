@@ -17,6 +17,6 @@
 	"require": {
 		"php": ">=7.1",
 		"humanmade/wp-simple-saml": "0.4",
-		"humanmade/delegated-oauth": "1.0.0"
+		"humanmade/delegated-oauth": "1.0.1"
 	}
 }
