@@ -11,13 +11,14 @@ function bootstrap() {
 
 function load_plugin() {
 	$config = wp_parse_args(
-		Altis\get_config()['modules']['sso']['wordpress'],
+		get_config()['modules']['sso']['wordpress'],
 		[
 			'server-rest-base' => '',
 			'oauth2-client-id' => '',
 			'sync-roles'       => '',
 			'cookie'           => true,
-		] );
+		] 
+	);
 
 	if ( ! empty( $config['server-rest-base'] ) ) {
 		define( 'HM_DELEGATED_AUTH_REST_BASE', $config['server-rest-base'] );
