@@ -10,12 +10,20 @@ function bootstrap() {
 }
 
 function load_plugin() {
-	$config = get_config()['modules']['sso']['wordpress'];
+	$config = wp_parse_args(
+		Altis\get_config()['modules']['sso']['wordpress'],
+		[
+			'server-rest-base' => '',
+			'oauth2-client-id' => '',
+			'sync-roles'       => '',
+			'cookie'           => true,
+		] );
 
-	define( 'HM_DELEGATED_AUTH_REST_BASE', $config['server-rest-base'] );
+	if ( ! empty( $config['server-rest-base'] ) ) {
+		define( 'HM_DELEGATED_AUTH_REST_BASE', $config['server-rest-base'] );
+	}
 
-	// Do not set HM_DELEGATED_AUTH_CLIENT_ID if client id is empty to disable cookie auth
-	if ( ! empty( $config['oauth2-client-id'] ) ) {
+	if ( ! empty( $config['oauth2-client-id'] ) && ! empty( $config['cookie'] ) ) {
 		define( 'HM_DELEGATED_AUTH_CLIENT_ID', $config['oauth2-client-id'] );
 	}
 
