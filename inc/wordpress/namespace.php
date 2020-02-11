@@ -17,7 +17,7 @@ function load_plugin() {
 			'oauth2-client-id' => '',
 			'sync-roles'       => '',
 			'cookie'           => true,
-		] 
+		]
 	);
 
 	if ( ! empty( $config['server-rest-base'] ) ) {
