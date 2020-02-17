@@ -8,12 +8,7 @@ use function Altis\register_module;
 require_once __DIR__ . '/inc/saml/namespace.php';
 require_once __DIR__ . '/inc/wordpress/namespace.php';
 
-// Don't self-initialize if this is not an Altis execution.
-if ( ! function_exists( 'add_action' ) ) {
-	return;
-}
-
-add_action( 'altis.modules.init', function () {
+function register() {
 	$default_settings = [
 		'enabled'   => true,
 		'saml'      => false,
@@ -28,4 +23,11 @@ add_action( 'altis.modules.init', function () {
 			WordPress\bootstrap();
 		}
 	} );
-} );
+}
+
+// Don't self-initialize if this is not an Altis execution.
+if ( ! function_exists( 'add_action' ) ) {
+	return;
+}
+
+add_action( 'altis.modules.init', __NAMESPACE__ . '\\register' );
