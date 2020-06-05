@@ -1,9 +1,13 @@
 <?php
+/**
+ * Altis SSO Module.
+ *
+ * @package altis-sso
+ */
 
-namespace Altis\SSO; // @codingStandardsIgnoreLine
+namespace Altis\SSO; // phpcs:ignore
 
-use function Altis\get_config;
-use function Altis\register_module;
+use Altis;
 
 add_action( 'altis.modules.init', function () {
 	$default_settings = [
@@ -11,8 +15,8 @@ add_action( 'altis.modules.init', function () {
 		'saml'      => false,
 		'wordpress' => false,
 	];
-	register_module( 'sso', __DIR__, 'SSO', $default_settings, function () {
-		$config = get_config()['modules']['sso'];
+	Altis\register_module( 'sso', __DIR__, 'SSO', $default_settings, function () {
+		$config = Altis\get_config()['modules']['sso'];
 		if ( $config['saml'] ) {
 			SAML\bootstrap();
 		}
