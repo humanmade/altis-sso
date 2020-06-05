@@ -2,7 +2,7 @@
 /**
  * Altis SSO WordPress OAuth.
  *
- * @package altis-sso
+ * @package altis/sso
  */
 
 namespace Altis\SSO\WordPress;

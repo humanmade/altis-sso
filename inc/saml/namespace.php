@@ -2,7 +2,7 @@
 /**
  * Altis SSO SAML.
  *
- * @package altis-sso
+ * @package altis/sso
  */
 
 namespace Altis\SSO\SAML;

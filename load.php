@@ -2,7 +2,7 @@
 /**
  * Altis SSO Module.
  *
- * @package altis-sso
+ * @package altis/sso
  */
 
 namespace Altis\SSO; // phpcs:ignore
