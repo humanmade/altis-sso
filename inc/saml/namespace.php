@@ -1,18 +1,25 @@
 <?php
+/**
+ * Altis SSO SAML.
+ *
+ * @package altis/sso
+ */
 
 namespace Altis\SSO\SAML;
 
-use const Altis\ROOT_DIR;
-use function Altis\get_config;
+use Altis;
 
+/**
+ * Bootstrap SAML integration.
+ *
+ * @return void
+ */
 function bootstrap() {
-	$config = get_config()['modules']['sso']['saml'];
-
 	add_filter( 'wpsimplesaml_network_activated', '__return_true' );
 	add_filter( 'wpsimplesaml_idp_metadata_xml_path', __NAMESPACE__ . '\\get_idp_metadata_file_path' );
 	add_filter( 'pre_site_option_sso_sp_base', __NAMESPACE__ . '\\get_sp_client_id' );
 	add_filter( 'pre_site_option_sso_enabled', __NAMESPACE__ . '\\get_sso_enabled_option' );
-	require_once ROOT_DIR . '/vendor/humanmade/wp-simple-saml/plugin.php';
+	require_once Altis\ROOT_DIR . '/vendor/humanmade/wp-simple-saml/plugin.php';
 
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\remove_plugin_admin_ui' );
 }
@@ -25,22 +32,27 @@ function bootstrap() {
  * @return string Full path to the metadata file.
  */
 function get_idp_metadata_file_path() : string {
-	$config = get_config()['modules']['sso']['saml'];
+	$config = Altis\get_config()['modules']['sso']['saml'];
 	if ( isset( $config['metadata_file'] ) ) {
-		return ROOT_DIR . DIRECTORY_SEPARATOR . $config['metadata_file'];
+		return Altis\ROOT_DIR . DIRECTORY_SEPARATOR . $config['metadata_file'];
 	}
 
 	// If the legacy-style file exists, load it, but warn.
-	$legacy_file = ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
+	$legacy_file = Altis\ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
 	if ( file_exists( $legacy_file ) ) {
 		trigger_error( 'The default "config/sso/saml-idp-metadata.xml" path is deprecated as of Altis 2.0. Specify the metadata_file setting manually, or use the default ".config/sso/saml-idp-metadata.xml".', E_USER_DEPRECATED );
 		return $legacy_file;
 	}
 
 	// Otherwise, use the default.
-	return ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
+	return Altis\ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
 }
 
+/**
+ * Get the network root site URL as a client ID.
+ *
+ * @return string
+ */
 function get_sp_client_id() : string {
 	return network_site_url( '/' );
 }
@@ -53,7 +65,7 @@ function get_sp_client_id() : string {
  * @return string
  */
 function get_sso_enabled_option() : string {
-	$config = get_config()['modules']['sso']['saml'];
+	$config = Altis\get_config()['modules']['sso']['saml'];
 	return  empty( $config['required'] ) ? 'link' : 'force';
 }
 
