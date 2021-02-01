@@ -21,6 +21,11 @@
 		"humanmade/delegated-oauth": "^1.0.2"
 	},
 	"extra": {
-		"altis": {}
+		"altis": {
+			"install-overrides": [
+				"humanmade/wp-simple-saml",
+				"humanmade/delegated-oauth"
+			]
+		}
 	}
 }
