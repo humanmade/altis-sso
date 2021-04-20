@@ -41,8 +41,11 @@ function load_plugin() {
 	if ( ! empty( $config['oauth2-client-id'] ) && ! empty( $config['cookie'] ) ) {
 		define( 'HM_DELEGATED_AUTH_CLIENT_ID', $config['oauth2-client-id'] );
 	}
+	
+	if ( ! defined( 'HM_DELEGATED_AUTH_LOGIN_TEXT' ) ) {
+		define( 'HM_DELEGATED_AUTH_LOGIN_TEXT', __( 'Login with WordPress SSO', 'altis' ) );
+	}
 
-	define( 'HM_DELEGATED_AUTH_LOGIN_TEXT', __( 'Login with WordPress SSO', 'altis' ) );
 	add_filter( 'delegated_oauth.sync-roles', ( empty( $config['sync-roles'] ) || ! $config['sync-roles'] ) ? '__return_false' : '__return_true' );
 
 	require_once Altis\ROOT_DIR . '/vendor/humanmade/delegated-oauth/plugin.php';
