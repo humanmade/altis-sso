@@ -8,6 +8,7 @@
 namespace Altis\SSO\WordPress;
 
 use Altis;
+use HM\Delegated_Auth;
 
 /**
  * Set up action hooks.
@@ -16,6 +17,7 @@ use Altis;
  */
 function bootstrap() {
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\load_plugin' );
+	add_filter( 'delegated-oauth2.login.button_markup', __NAMESPACE__ . '\\override_button_markup', 0 );
 }
 
 /**
@@ -49,4 +51,25 @@ function load_plugin() {
 	add_filter( 'delegated_oauth.sync-roles', ( empty( $config['sync-roles'] ) || ! $config['sync-roles'] ) ? '__return_false' : '__return_true' );
 
 	require_once Altis\ROOT_DIR . '/vendor/humanmade/delegated-oauth/plugin.php';
+
+	// Remove built-in login form UI.
+	remove_action( 'login_form', 'HM\\Delegated_Auth\\Cookie\\on_login_form' );
+}
+
+/**
+ * Show SSO login link in login form
+ *
+ * @action login_form
+ */
+function render_login_link() : void {
+	Delegated_Auth\Cookie\on_login_form();
+}
+
+/**
+ * Get the log in button markup, overriding Delegated OAuth's.
+ *
+ * @return string
+ */
+function override_button_markup() : string {
+	return '<p class="altis-sso-wordpress"><a class="button button-hero" href="%1$s">%2$s</a></p>';
 }
