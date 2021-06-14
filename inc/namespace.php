@@ -37,6 +37,16 @@ function is_sso_active() : bool {
 }
 
 /**
+ * Check whether native (WordPress) login should be hidden.
+ *
+ * @return bool True if the native login form should be hidden, false otherwise.
+ */
+function is_native_hidden() : bool {
+	$config = Altis\get_config()['modules']['sso'];
+	return $config['hide_native'] ?? false;
+}
+
+/**
  * Output the single sign-on buttons on the login form.
  *
  * Also handles restyling the form.
@@ -45,7 +55,9 @@ function output_sso_buttons() : void {
 	$config = Altis\get_config()['modules']['sso'];
 	?>
 	<div class="altis-sso-options">
-		<div class="altis-sso-sep"><?php esc_html_e( 'or', 'altis' ) ?></div>
+		<?php if ( ! is_native_hidden() ): ?>
+			<div class="altis-sso-sep"><?php esc_html_e( 'or', 'altis' ) ?></div>
+		<?php endif; ?>
 
 		<?php if ( $config['saml'] ): ?>
 			<?php SAML\render_login_link() ?>
@@ -86,6 +98,16 @@ function output_sso_buttons() : void {
 			width: 100%;
 			text-align: center;
 		}
+
+		<?php if ( is_native_hidden() ): ?>
+			#loginform > :first-child,
+			#loginform .user-pass-wrap,
+			#loginform .forgetmenot,
+			#loginform .submit,
+			#nav {
+				display: none;
+			}
+		<?php endif; ?>
 	</style>
 	<?php
 }

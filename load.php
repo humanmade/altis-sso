@@ -14,6 +14,7 @@ add_action( 'altis.modules.init', function () {
 		'enabled' => true,
 		'saml' => false,
 		'wordpress' => false,
+		'hide_native' => false,
 	];
 	Altis\register_module( 'sso', __DIR__, 'SSO', $default_settings, function () {
 		require __DIR__ . '/inc/namespace.php';
