@@ -45,7 +45,7 @@ function load_plugin() {
 	}
 
 	if ( ! defined( 'HM_DELEGATED_AUTH_LOGIN_TEXT' ) ) {
-		define( 'HM_DELEGATED_AUTH_LOGIN_TEXT', __( 'Login with WordPress SSO', 'altis' ) );
+		define( 'HM_DELEGATED_AUTH_LOGIN_TEXT', __( 'Log in with WordPress SSO', 'altis' ) );
 	}
 
 	add_filter( 'delegated_oauth.sync-roles', ( empty( $config['sync-roles'] ) || ! $config['sync-roles'] ) ? '__return_false' : '__return_true' );
