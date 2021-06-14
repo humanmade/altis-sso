@@ -1,4 +1,9 @@
 <?php
+/**
+ * Altis SSO.
+ *
+ * @package altis/sso
+ */
 
 namespace Altis\SSO;
 
