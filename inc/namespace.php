@@ -55,15 +55,15 @@ function output_sso_buttons() : void {
 	$config = Altis\get_config()['modules']['sso'];
 	?>
 	<div class="altis-sso-options">
-		<?php if ( ! is_native_hidden() ): ?>
+		<?php if ( ! is_native_hidden() ) : ?>
 			<div class="altis-sso-sep"><?php esc_html_e( 'or', 'altis' ) ?></div>
 		<?php endif; ?>
 
-		<?php if ( $config['saml'] ): ?>
+		<?php if ( $config['saml'] ) : ?>
 			<?php SAML\render_login_link() ?>
 		<?php endif; ?>
 
-		<?php if ( $config['wordpress'] ): ?>
+		<?php if ( $config['wordpress'] ) : ?>
 			<?php WordPress\render_login_link() ?>
 		<?php endif; ?>
 	</div>
@@ -99,7 +99,7 @@ function output_sso_buttons() : void {
 			text-align: center;
 		}
 
-		<?php if ( is_native_hidden() ): ?>
+		<?php if ( is_native_hidden() ) : ?>
 			#loginform > :first-child,
 			#loginform .user-pass-wrap,
 			#loginform .forgetmenot,
