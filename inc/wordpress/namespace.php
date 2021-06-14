@@ -17,7 +17,7 @@ use HM\Delegated_Auth;
  */
 function bootstrap() {
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\load_plugin' );
-	add_filter( 'delegated-oauth2.login.button_markup', __NAMESPACE__ . '\\override_button_markup', 0 );
+	add_filter( 'delegated_oauth.login.button_markup', __NAMESPACE__ . '\\override_button_markup', 0 );
 }
 
 /**
