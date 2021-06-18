@@ -8,6 +8,7 @@
 namespace Altis\SSO\SAML;
 
 use Altis;
+use HumanMade\SimpleSaml;
 
 /**
  * Bootstrap SAML integration.
@@ -76,4 +77,36 @@ function remove_plugin_admin_ui() {
 	remove_action( 'admin_init', 'HumanMade\\SimpleSaml\\Admin\\settings_fields' );
 	remove_action( 'wpmu_options', 'HumanMade\\SimpleSaml\\Admin\\network_settings_fields' );
 	remove_action( 'update_wpmu_options', 'HumanMade\\SimpleSaml\\Admin\\save_network_settings_fields' );
+
+	// Remove built-in login form UI.
+	remove_action( 'login_message', 'HumanMade\\SimpleSaml\\login_form_link' );
+}
+
+/**
+ * Show SSO login link in login form
+ *
+ * @action login_form
+ */
+function render_login_link() {
+	/**
+	 * Filters whether we should show the SSO login link in login form
+	 *
+	 * @param bool $force_sso Forces SSO authentication if true, defaults to True.
+	 */
+	if ( ! apply_filters( 'wpsimplesaml_log_in_link', true ) ) {
+		return;
+	}
+
+	$redirect_url = SimpleSaml\get_redirection_url();
+
+	printf(
+		'<p class="altis-sso-saml"><a class="button button-hero" href="%s" id="login-via-sso">%s</a></p>',
+		esc_url( add_query_arg( 'redirect_to', urlencode( $redirect_url ), home_url( 'sso/login/' ) ) ),
+		/**
+		 * Filters the SSO login button text
+		 *
+		 * @param string $login_button_text Text to be used for the login button.
+		 */
+		esc_html( apply_filters( 'wpsimplesaml_log_in_text', __( 'Log in with SAML SSO', 'wp-simple-saml' ) ) )
+	);
 }

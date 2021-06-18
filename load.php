@@ -11,17 +11,10 @@ use Altis;
 
 add_action( 'altis.modules.init', function () {
 	$default_settings = [
-		'enabled'   => true,
-		'saml'      => false,
+		'enabled' => true,
+		'saml' => false,
 		'wordpress' => false,
+		'hide_native' => false,
 	];
-	Altis\register_module( 'sso', __DIR__, 'SSO', $default_settings, function () {
-		$config = Altis\get_config()['modules']['sso'];
-		if ( $config['saml'] ) {
-			SAML\bootstrap();
-		}
-		if ( $config['wordpress'] ) {
-			WordPress\bootstrap();
-		}
-	} );
+	Altis\register_module( 'sso', __DIR__, 'SSO', $default_settings, __NAMESPACE__ . '\\bootstrap' );
 } );
