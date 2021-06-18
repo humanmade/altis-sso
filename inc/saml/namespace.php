@@ -91,7 +91,7 @@ function render_login_link() {
 	/**
 	 * Filters whether we should show the SSO login link in login form
 	 *
-	 * @return bool  Forces SSO authentication if true, defaults to True
+	 * @param bool $force_sso Forces SSO authentication if true, defaults to True.
 	 */
 	if ( ! apply_filters( 'wpsimplesaml_log_in_link', true ) ) {
 		return;
@@ -105,7 +105,7 @@ function render_login_link() {
 		/**
 		 * Filters the SSO login button text
 		 *
-		 * @return string Text to be used for the login button
+		 * @param string $login_button_text Text to be used for the login button.
 		 */
 		esc_html( apply_filters( 'wpsimplesaml_log_in_text', __( 'Log in with SAML SSO', 'wp-simple-saml' ) ) )
 	);
