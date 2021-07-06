@@ -18,7 +18,7 @@
 	"require": {
 		"php": ">=7.1",
 		"humanmade/wp-simple-saml": "0.4.1",
-		"humanmade/delegated-oauth": "^1.0.2"
+		"humanmade/delegated-oauth": "^1.0.5"
 	},
 	"extra": {
 		"altis": {
