@@ -6,10 +6,18 @@ To enabled SAML 2.0 support, define the following options in the configuration f
 
 
 ```json
-"sso": {
-	"saml": {
-		"required": true | false,
-		"metadata_file": ".config/sso/saml-idp-metadata.xml"
+{
+	"extra": {
+		"altis": {
+			"modules": {
+				"sso": {
+					"saml": {
+						"required": true | false,
+						"metadata_file": ".config/sso/saml-idp-metadata.xml"
+					}
+				}
+			}
+		}
 	}
 }
 ```
