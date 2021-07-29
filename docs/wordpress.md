@@ -7,10 +7,18 @@ To enabled WordPress SSO, you must create an OAuth 2 application on the WordPres
 Provide the REST BASE of your WordPress site (usually `https://examples.com/wp-json/`), along with the OAuth client id (public key) obtained in the previous step. This is done via the `sso.wordpress` setting option:
 
 ```json
-"sso": {
-	"wordpress": {
-		"server-rest-base": "https://examples.com/wp-json/",
-		"oauth2-client-id": "XXXXXXXXXXX"
+{
+	"extra": {
+		"altis": {
+			"modules": {
+				"sso": {
+					"wordpress": {
+						"server-rest-base": "https://examples.com/wp-json/",
+						"oauth2-client-id": "XXXXXXXXXXX"
+					}
+				}
+			}
+		}
 	}
 }
 ```
