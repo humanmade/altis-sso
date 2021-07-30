@@ -15,6 +15,12 @@ use Altis;
  * @return void
  */
 function bootstrap() {
+	// Set server port to 443 or 80 for SAML, port 8080 breaks validation.
+	if ( class_exists( '\\OneLogin\\Saml2\\Utils' ) ) {
+		$is_https = ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on';
+		\OneLogin\Saml2\Utils::setSelfPort( $is_https ? '443' : '80' );
+	}
+
 	add_filter( 'wpsimplesaml_network_activated', '__return_true' );
 	add_filter( 'wpsimplesaml_idp_metadata_xml_path', __NAMESPACE__ . '\\get_idp_metadata_file_path' );
 	add_filter( 'pre_site_option_sso_sp_base', __NAMESPACE__ . '\\get_sp_client_id' );
