@@ -26,6 +26,7 @@ function bootstrap() {
 	add_filter( 'wpsimplesaml_idp_metadata_xml_path', __NAMESPACE__ . '\\get_idp_metadata_file_path' );
 	add_filter( 'pre_site_option_sso_sp_base', __NAMESPACE__ . '\\get_sp_client_id' );
 	add_filter( 'pre_site_option_sso_enabled', __NAMESPACE__ . '\\get_sso_enabled_option' );
+	add_filter( 'hm-require-login.allowed_pages', __NAMESPACE__ . '\\allow_sso_urls', 10, 2 );
 	require_once Altis\ROOT_DIR . '/vendor/humanmade/wp-simple-saml/plugin.php';
 
 	add_action( 'plugins_loaded', __NAMESPACE__ . '\\remove_plugin_admin_ui' );
@@ -86,6 +87,21 @@ function remove_plugin_admin_ui() {
 
 	// Remove built-in login form UI.
 	remove_action( 'login_message', 'HumanMade\\SimpleSaml\\login_form_link' );
+}
+
+/**
+ * Ensure SAML endpoints are not redirected when require login is active.
+ *
+ * @param array $allowed Allowed PHP pages.
+ * @param string|null $page The current page.
+ * @return array
+ */
+function allow_sso_urls( array $allowed, ?string $page ) : array {
+	if ( $page === 'index.php' && strpos( $_SERVER['REQUEST_URI'], '/sso/' ) !== false ) {
+		$allowed[] = $page;
+	}
+
+	return $allowed;
 }
 
 /**
