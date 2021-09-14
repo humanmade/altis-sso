@@ -10,6 +10,8 @@ namespace Altis\SSO\SAML;
 use Altis;
 use HumanMade\SimpleSaml;
 
+use function Altis\get_environment_type;
+
 /**
  * Bootstrap SAML integration.
  *
@@ -45,15 +47,21 @@ function get_idp_metadata_file_path() : string {
 		return Altis\ROOT_DIR . DIRECTORY_SEPARATOR . $config['metadata_file'];
 	}
 
+	// Check for env-specific metadata files.
+	$env_file = implode( DIRECTORY_SEPARATOR, [ Altis\ROOT_DIR, '.config', 'sso', sprintf( 'saml-idp-metadata-%s.xml', get_environment_type() ) ] );
+	if ( file_exists( $env_file ) ) {
+		return $env_file;
+	}
+
 	// If the legacy-style file exists, load it, but warn.
-	$legacy_file = Altis\ROOT_DIR . '/config/sso/saml-idp-metadata.xml';
+	$legacy_file = implode( DIRECTORY_SEPARATOR, [ Altis\ROOT_DIR, 'config', 'sso', 'saml-idp-metadata.xml' ] );
 	if ( file_exists( $legacy_file ) ) {
 		trigger_error( 'The default "config/sso/saml-idp-metadata.xml" path is deprecated as of Altis 2.0. Specify the metadata_file setting manually, or use the default ".config/sso/saml-idp-metadata.xml".', E_USER_DEPRECATED );
 		return $legacy_file;
 	}
 
 	// Otherwise, use the default.
-	return Altis\ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
+	return implode( DIRECTORY_SEPARATOR, [ Altis\ROOT_DIR, '.config', 'sso', 'saml-idp-metadata.xml' ] );
 }
 
 /**
