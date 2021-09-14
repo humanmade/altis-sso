@@ -17,7 +17,7 @@ To enable SAML 2.0 support, define the following options in the configuration fi
 						"required": true | false,
 					}
 				}
-			}
+			},
 			"environments": {
 				"development": {
 					"modules": {
