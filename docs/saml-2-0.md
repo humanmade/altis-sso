@@ -2,7 +2,7 @@
 
 The SSO module includes support for SAML 2.0 as a Service Provider. To enable SAML 2.0, you must define the `saml` setting in the Altis configuration. You'll need a copy of your SAML IdP Metadata XML too.
 
-To generate the Service Provider metadata file from Altis, which is typically needed to setup the Identity provider application for each environment, visit [/sso/metadata/](site://sso/metadata/) to download the metadata XML file. Collect these XML files for all environments and pass it to your colleagues responsible for the SSO integration setup. You should expect back an Identity provider metadata XML file per environment.
+To generate the Service Provider metadata file from Altis, which is typically needed to setup the Identity provider application for each environment, visit [`/sso/metadata/`](site://sso/metadata/) on your application to download the metadata XML file. Collect these XML files for all environments and pass it to your colleagues responsible for the SSO integration setup. You should expect back an Identity provider metadata XML file per environment.
 
 To enable SAML 2.0 support, define the following options in the configuration file, and provide the SAML IdP Metadata in a file per environment:
 
