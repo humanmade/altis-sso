@@ -2,7 +2,9 @@
 
 The SSO module includes support for SAML 2.0 as a Service Provider. To enable SAML 2.0, you must define the `saml` setting in the Altis configuration. You'll need a copy of your SAML IdP Metadata XML too.
 
-To enabled SAML 2.0 support, define the following options in the configuration file, and provide the SAML IdP Metadata in a file:
+To generate the Service Provider metadata file from Altis, which is typically needed to setup the Identity provider application for each environment, visit [`/sso/metadata/`](site://sso/metadata/) on your application to download the metadata XML file. Collect these XML files for all environments and pass it to your colleagues responsible for the SSO integration setup. You should expect back an Identity provider metadata XML file per environment.
+
+To enable SAML 2.0 support, define the following options in the configuration file, and provide the SAML IdP Metadata in a file per environment:
 
 
 ```json
@@ -13,7 +15,17 @@ To enabled SAML 2.0 support, define the following options in the configuration f
 				"sso": {
 					"saml": {
 						"required": true | false,
-						"metadata_file": ".config/sso/saml-idp-metadata.xml"
+					}
+				}
+			},
+			"environments": {
+				"development": {
+					"modules": {
+						"sso": {
+							"saml": {
+								"metadata_file": ".config/sso/saml-idp-metadata-development.xml"
+							}
+						}
 					}
 				}
 			}
@@ -24,7 +36,9 @@ To enabled SAML 2.0 support, define the following options in the configuration f
 
 The `required` setting defines whether authentication via the SAML 2.0 IdP for all users, or if it should be optional. When set to `true`, all users attempting to login to the site will be redirected to the SAML IdP for authorization. When setting this to `false`, an "SSO Login" link will be added to the login page, where users can optionally authorize with the SAML IdP.
 
-Your SAML IdP Metadata file is specified by the `metadata_file` setting, which is a path relative to your project root. By default, this is set to `.config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace.
+Your SAML IdP Metadata file is specified by the `metadata_file` setting, which is a path relative to your project root. By default, this falls back to `.config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace.
+
+It is suggested to keep the default `saml-idp-metadata.xml` file for local testing, as that's used by our SSO testing instructions, or at least rename it to `.config/sso/saml-idp-metadata-local.xml`.
 
 For example:
 
