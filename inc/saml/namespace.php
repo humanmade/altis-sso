@@ -46,7 +46,7 @@ function get_idp_metadata_file_path() : string {
 	}
 
 	// Check for env-specific metadata files.
-	$env_file = Altis\ROOT_DIR . '/.config/sso/' . sprintf( 'saml-idp-metadata-%s.xml', \Altis\get_environment_type() );
+	$env_file = Altis\ROOT_DIR . '/.config/sso/' . sprintf( 'saml-idp-metadata-%s.xml', Altis\get_environment_type() );
 	if ( file_exists( $env_file ) ) {
 		return $env_file;
 	}
