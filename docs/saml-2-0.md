@@ -38,4 +38,4 @@ The `required` setting defines whether authentication via the SAML 2.0 IdP for a
 
 Your SAML IdP Metadata file is specified by the `metadata_file` setting, which is a path relative to your project root. By default, this is set to `.config/sso/saml-idp-metadata-%ENVIRONMENT%.xml` where `%ENVIRONMENT%` is one of `local`, `development`, `staging`, or `production`, and falls back to the sample config at `vendor/altis/sso/config/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace. The setting doesn't need to be overridden if the files are in the expected location with the expected naming conventions.
 
-For further details on SAML 2.0, see the [wp-simple-saml](https://github.com/humanmade/wp-simple-saml) plugin details.
+For further details on SAML 2.0, and for local testing instructions, see the [wp-simple-saml](https://github.com/humanmade/wp-simple-saml) plugin details.
