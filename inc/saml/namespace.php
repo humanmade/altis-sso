@@ -58,6 +58,13 @@ function get_idp_metadata_file_path() : string {
 		return $legacy_file;
 	}
 
+	// If the legacy-style file exists, load it, but warn.
+	$legacy_file = Altis\ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
+	if ( file_exists( $legacy_file ) ) {
+		trigger_error( 'The default ".config/sso/saml-idp-metadata.xml" path is deprecated as of Altis 10.0. Specify the metadata_file setting per-environment manually.', E_USER_DEPRECATED );
+		return $legacy_file;
+	}
+
 	// Otherwise, use the default.
 	return Altis\ROOT_DIR . '/vendor/altis/sso/config/saml-idp-metadata.xml';
 }
