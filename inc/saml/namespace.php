@@ -59,7 +59,7 @@ function get_idp_metadata_file_path() : string {
 	}
 
 	// Otherwise, use the default.
-	return Altis\ROOT_DIR . '/.config/sso/saml-idp-metadata.xml';
+	return Altis\ROOT_DIR . '/vendor/altis/sso/config/saml-idp-metadata.xml';
 }
 
 /**
