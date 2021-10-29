@@ -1,10 +1,21 @@
 # SAML 2.0
 
-The SSO module includes support for SAML 2.0 as a Service Provider. To enable SAML 2.0, you must define the `saml` setting in the Altis configuration. You'll need a copy of your SAML IdP Metadata XML too.
+The SSO module includes support for SAML 2.0 as a Service Provider (SP). To enable SAML 2.0, you must define the `saml` setting in the Altis configuration. You'll need a copy of your SAML Identity Provider (IdP) metadata XML too.
 
-To generate the Service Provider metadata file from Altis, which is typically needed to setup the Identity provider application for each environment, visit [`/sso/metadata/`](site://sso/metadata/) on your application to download the metadata XML file. Collect these XML files for all environments and pass it to your colleagues responsible for the SSO integration setup. You should expect back an Identity provider metadata XML file per environment.
+## Service Provider Endpoints
 
-To enable SAML 2.0 support, define the following options in the configuration file, and provide the SAML IdP Metadata in a file per environment:
+In your IdP you can provide the following endpoint URLs to configure SSO, where `<site-url>` should be replaced with your application's primary site URL:
+
+- Single Logout Service (SLS): `https://<site-url>/sso/sls`
+- Assertion Consumer Service (ACS): `https://<site-url>/sso/verify`
+
+## Identity Provider Metadata XML
+
+To enable SAML 2.0 support, add the IdP metadata XML files to your project's `.config/sso/` directory (you may need to create the directory first).
+
+By default, Altis looks for `.config/sso/saml-idp-metadata-%ENVIRONMENT%.xml` where `%ENVIRONMENT%` is one of `local`, `development`, `staging`, or `production`, and falls back to `.config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespace.
+
+Lastly define the following option in your Altis configuration:
 
 
 ```json
@@ -17,13 +28,32 @@ To enable SAML 2.0 support, define the following options in the configuration fi
 						"required": true | false,
 					}
 				}
-			},
+			}
+		}
+	}
+}
+```
+
+The `required` setting defines whether authentication via the SAML 2.0 IdP _must_ be used to login, or if it should be optional. When set to `true`, all users attempting to login to the site will be redirected to the SAML IdP for authorization. When setting this to `false`, an "SSO Login" link will be added to the login page, where users can optionally authorize with the SAML IdP.
+
+When you have an IdP Metadata XML file you also retrieve the Service Provider Metadata XML from the URL `https://<site-url>/sso/metadata`.
+
+### Custom IdP Metadata XML File Paths
+
+The SAML IdP Metadata XML file location can be overridden by the `sso.saml.metadata_file` config setting, which is a path relative to your project root. The setting doesn't need to be overridden if the files are in the expected location with the expected naming conventions. The config setting is provided as an option if your IdP Metadata XML is not added to the code base manually.
+
+You can also override the settings on a per environment basis using the `environments.<env-type>` config path, for example:
+
+```json
+{
+	"extra": {
+		"altis": {
 			"environments": {
 				"development": {
 					"modules": {
 						"sso": {
 							"saml": {
-								"metadata_file": ".config/sso/saml-idp-metadata-development.xml"
+								"metadata_file": ".config/sso/custom-dev-idp-metadata.xml"
 							}
 						}
 					}
@@ -34,37 +64,4 @@ To enable SAML 2.0 support, define the following options in the configuration fi
 }
 ```
 
-The `required` setting defines whether authentication via the SAML 2.0 IdP for all users, or if it should be optional. When set to `true`, all users attempting to login to the site will be redirected to the SAML IdP for authorization. When setting this to `false`, an "SSO Login" link will be added to the login page, where users can optionally authorize with the SAML IdP.
-
-Your SAML IdP Metadata file is specified by the `metadata_file` setting, which is a path relative to your project root. By default, this is set to `.config/sso/saml-idp-metadata-%ENVIRONMENT%.xml` where `%ENVIRONMENT%` is one of `local`, `development`, `staging`, or `production`, and falls back to `.config/sso/saml-idp-metadata.xml`. Make sure there are no XML formatting errors or leading whitespeace. The setting doesn't need to be overridden if the files are in the expected location with the expected naming conventions.
-
-It is suggested to keep the default `saml-idp-metadata.xml` file for local testing, as that's used by our SSO testing instructions, or at least rename it to `.config/sso/saml-idp-metadata-local.xml`.
-
-For example:
-
-```xml
-<?xml version="1.0"?>
-<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="http://localhost:8082/simplesaml/saml2/idp/metadata.php">
-  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-    <md:KeyDescriptor use="signing">
-      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-        <ds:X509Data>
-          <ds:X509Certificate>//redacted</ds:X509Certificate>
-        </ds:X509Data>
-      </ds:KeyInfo>
-    </md:KeyDescriptor>
-    <md:KeyDescriptor use="encryption">
-      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-        <ds:X509Data>
-          <ds:X509Certificate>//redacted</ds:X509Certificate>
-        </ds:X509Data>
-      </ds:KeyInfo>
-    </md:KeyDescriptor>
-    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://localhost:8082/simplesaml/saml2/idp/SingleLogoutService.php"/>
-    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
-    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://localhost:8082/simplesaml/saml2/idp/SSOService.php"/>
-  </md:IDPSSODescriptor>
-</md:EntityDescriptor>
-```
-
-For further details on SAML 2.0, see the [wp-simple-saml](https://github.com/humanmade/wp-simple-saml) plugin details.
+For further details on SAML 2.0, [see the docs for wp-simple-saml plugin](https://github.com/humanmade/wp-simple-saml) that powers this feature.
