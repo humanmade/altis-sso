@@ -16,6 +16,10 @@ use HumanMade\SimpleSaml;
  * @return void
  */
 function bootstrap() {
+	if ( defined( 'WP_INITIAL_INSTALL' ) && WP_INITIAL_INSTALL ) {
+		return;
+	}
+
 	// Set server port to 443 or 80 for SAML, port 8080 breaks validation.
 	if ( class_exists( '\\OneLogin\\Saml2\\Utils' ) ) {
 		$is_https = ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on';
