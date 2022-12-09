@@ -21,9 +21,6 @@ function bootstrap() {
 	if ( $config['saml'] ) {
 		SAML\bootstrap();
 	}
-	if ( $config['wordpress'] ) {
-		WordPress\bootstrap();
-	}
 
 	add_action( 'login_form', __NAMESPACE__ . '\\output_sso_buttons' );
 }
@@ -35,7 +32,7 @@ function bootstrap() {
  */
 function is_sso_active() : bool {
 	$config = Altis\get_config()['modules']['sso'];
-	if ( $config['saml'] || $config['wordpress'] ) {
+	if ( $config['saml'] ) {
 		return true;
 	}
 	return false;
@@ -66,10 +63,6 @@ function output_sso_buttons() : void {
 
 		<?php if ( $config['saml'] ) : ?>
 			<?php SAML\render_login_link() ?>
-		<?php endif; ?>
-
-		<?php if ( $config['wordpress'] ) : ?>
-			<?php WordPress\render_login_link() ?>
 		<?php endif; ?>
 	</div>
 	<style>

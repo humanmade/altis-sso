@@ -13,7 +13,6 @@ add_action( 'altis.modules.init', function () {
 	$default_settings = [
 		'enabled' => true,
 		'saml' => false,
-		'wordpress' => false,
 		'hide_native' => false,
 	];
 	$options = [

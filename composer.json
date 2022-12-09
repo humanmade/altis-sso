@@ -12,8 +12,7 @@
 	"autoload": {
 		"files": [
 			"inc/namespace.php",
-			"inc/saml/namespace.php",
-			"inc/wordpress/namespace.php"
+			"inc/saml/namespace.php"
 		]
 	},
 	"require": {
