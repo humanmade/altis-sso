@@ -11,7 +11,6 @@ Once the CMS has a user record in the database, the user's session is authorized
 Supported authorization providers are:
 
 * [SAML 2.0](./saml-2-0.md)
-* [WordPress](./wordpress.md)
 
 ## Hiding native login
 

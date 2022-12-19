@@ -12,20 +12,17 @@
 	"autoload": {
 		"files": [
 			"inc/namespace.php",
-			"inc/saml/namespace.php",
-			"inc/wordpress/namespace.php"
+			"inc/saml/namespace.php"
 		]
 	},
 	"require": {
 		"php": ">=7.1",
-		"humanmade/wp-simple-saml": "~0.4.3",
-		"humanmade/delegated-oauth": "^1.0.5"
+		"humanmade/wp-simple-saml": "~0.4.3"
 	},
 	"extra": {
 		"altis": {
 			"install-overrides": [
-				"humanmade/wp-simple-saml",
-				"humanmade/delegated-oauth"
+				"humanmade/wp-simple-saml"
 			]
 		}
 	}
