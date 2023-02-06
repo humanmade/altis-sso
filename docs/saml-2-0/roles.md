@@ -56,9 +56,16 @@ The `wpsimplesaml_map_role` filter receives the following parameters:
 apply_filters( 'wpsimplesaml_map_role', get_option( 'default_role' ), $attributes, $user->ID, $user );
 ```
 
+You'll also need to enable mapping via the `wpsimplesaml_manage_roles` filter:
+
+```php
+add_filter( 'wpsimplesaml_manage_roles', '__return_true', 11 );
+```
+
 For example, you could hardcode this to make all users editors instead of the default role:
 
 ```php
+add_filter( 'wpsimplesaml_manage_roles', '__return_true', 11 );
 add_filter( 'wpsimplesaml_map_role', function ( $role ) {
 	return [
 		'editor',
@@ -76,6 +83,7 @@ These are exposed via the `http://schemas.microsoft.com/ws/2008/06/identity/clai
 ```php
 // Map AD user group membership to WordPress roles.
 add_filter( 'wpsimplesaml_map_role', __NAMESPACE__ . '\\map_user_role', 10, 2 );
+add_filter( 'wpsimplesaml_manage_roles', '__return_true', 11 );
 
 /**
  * Map Active Directory user group membership to WordPress roles.
