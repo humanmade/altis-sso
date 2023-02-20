@@ -9,7 +9,7 @@ A variety of filters are provided to help map the data across from your identity
 
 By default, when users log in, they'll receive the default role for your site, matching WordPress' behaviour for open registration sites. (Typically, this is `subscriber`.)
 
-For large multisites or complex use cases, this may not be desirable, as you may want to assign roles manually instead. This setting can be changed by setting the `wpsimplesaml_add_users_to_site` filter to false.
+For large multisites or complex use cases, this may not be desirable, as you may want to assign roles manually instead. This setting can be changed by returning false from the `wpsimplesaml_add_users_to_site` filter.
 
 ```php
 add_filter( 'wpsimplesaml_add_users_to_site', '__return_false' );
