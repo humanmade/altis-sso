@@ -31,9 +31,9 @@ add_filter( 'wpsimplesaml_attribute_mapping', function() {
 
 ### Advanced user details
 
-Aside from the direct mapping of these , you can also filter the final data before it is sent to WordPress, via the `wpsimplesaml_user_data` filter.
+Aside from the direct mapping of these, you can also filter the final data before it is sent to WordPress, via the `wpsimplesaml_user_data` filter.
 
-This filter receives the full user data being passed to `wp_insert_user` if you need to apply any other customization to this user data. You'll also receive the SAML attributes.
+This filter receives the full user data being passed to `wp_insert_user`. You can use it to apply any other customization (including adding metadata) to this user data. You'll also receive the SAML attributes.
 
 ```
 /**
