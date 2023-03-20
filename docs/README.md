@@ -14,6 +14,6 @@ Supported authorization providers are:
 
 ## Hiding native login
 
-If you're using a single sign-on provider, you may wish to hide the regular WordPress username and password options from the login screen. This can be configured via setting the `modules.sso.hide_native` configuration option to `false`
+If you're using a single sign-on provider, you may wish to hide the regular WordPress username and password options from the login screen. This can be configured via setting the `modules.sso.hide_native` configuration option to `true`
 
 Note: This will only disable the visual display of the login form. Username and password authentication cannot be disabled.
