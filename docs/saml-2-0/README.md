@@ -9,6 +9,12 @@ In your IdP you can provide the following endpoint URLs to configure SSO, where 
 - Single Logout Service (SLS): `https://<site-url>/sso/sls`
 - Assertion Consumer Service (ACS): `https://<site-url>/sso/verify`
 
+**Note:**: `<site-url>` will default to your primary network URL rather than the current site's URL. For per site mode use the following filter:
+
+```php
+add_filter( 'wpsimplesaml_network_activated', '__return_false', 100 );
+```
+
 ## Identity Provider Metadata XML
 
 To enable SAML 2.0 support, add the IdP metadata XML files to your project's `.config/sso/` directory (you may need to create the directory first).
