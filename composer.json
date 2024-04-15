@@ -17,7 +17,7 @@
 	},
 	"require": {
 		"php": ">=7.1",
-		"humanmade/wp-simple-saml": "~0.5.0"
+		"humanmade/wp-simple-saml": "~0.5.1"
 	},
 	"extra": {
 		"altis": {
