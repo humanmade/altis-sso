@@ -37,8 +37,6 @@ Lastly define the following option in your Altis configuration:
                 "sso": {
                     "saml": {
                         "required": true
-                        |
-                        false
                     }
                 }
             }
