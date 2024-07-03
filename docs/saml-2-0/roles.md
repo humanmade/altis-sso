@@ -17,7 +17,7 @@ can be changed by returning false from the `wpsimplesaml_add_users_to_site` filt
 add_filter( 'wpsimplesaml_add_users_to_site', '__return_false' );
 ```
 
-This filter receives the enabled boolean as the filterable value, and additionally receives the `WP_User` object as the second
+This filter receives the enabled Boolean as the filterable value, and additionally receives the `WP_User` object as the second
 parameter, allowing you to change behaviour based on the specific user.
 
 ## Mapping roles from your IdP
@@ -25,7 +25,7 @@ parameter, allowing you to change behaviour based on the specific user.
 By default, roles aren't synchronized from your IdP, allowing you to manually assign them in WordPress instead.
 
 In cases where you want to synchronize these roles, you can use the `wpsimplesaml_map_role` filter to determine the user's role.
-This could be hardcoded, or use information from your IdP such as the ActiveDirectory role claim.
+This could be hard coded, or use information from your IdP such as the ActiveDirectory role claim.
 
 The `wpsimplesaml_map_role` filter receives the following parameters:
 
@@ -65,7 +65,7 @@ You'll also need to enable mapping via the `wpsimplesaml_manage_roles` filter:
 add_filter( 'wpsimplesaml_manage_roles', '__return_true', 11 );
 ```
 
-For example, you could hardcode this to make all users editors instead of the default role:
+For example, you could hard code this to make all users editors instead of the default role:
 
 ```php
 add_filter( 'wpsimplesaml_manage_roles', '__return_true', 11 );

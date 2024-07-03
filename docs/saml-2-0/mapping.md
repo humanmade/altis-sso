@@ -52,7 +52,7 @@ apply_filters( 'wpsimplesaml_user_data', $user_data, $attributes );
 ## Unique user matching
 
 By default, when SAML SSO attempts to find an existing user, it'll look for any user with a matching email address (as returned from
-your mapping code). You may want to change this to deduplicate based on other user data instead.
+your mapping code). You may want to change this to deduplicate them based on other user data instead.
 
 The `wpsimplesaml_match_user` filter allows you to implement your own user matching code:
 
